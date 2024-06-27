@@ -15,6 +15,13 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+JWT_ENCODING_ALGO= 'HS256'
+JWT_ENCODING_SECRET_KEY= 'Cyber@123'
+JWT_TOKEN_EXPIRY_DELTA= 300000
+AUTH_USER_MODEL = 'user_auth.User'
+
+AUTHENTICATION_BACKENDS = ["utils.base_authentication.AuthenticationBackend"]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -24,6 +31,8 @@ SECRET_KEY = 'django-insecure-+5ebgvi_s_1)6$*6t_-%m@n=(zw#cny=u#l#ev9#ue07ma^^72
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+ALLOWED_HOSTS = ['*', 'localhost:3000', 'http://localhost:3000']
 
 ALLOWED_HOSTS = []
 
@@ -37,16 +46,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
+    'user_auth',
+    'permissions',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
 ]
 
 ROOT_URLCONF = 'backend.urls'
