@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user_auth.urls')),
     path('permission/', include('permissions.urls')),
+    path('hrm/', include('hrm_e.urls')),
+
 ]
